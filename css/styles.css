@@ -1,0 +1,153 @@
+/* Base styles pour la page */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f5f5f5;
+}
+
+main {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Styles pour les sections de visualisation */
+.viz-section {
+  background: white;
+  padding: 30px;
+  margin-bottom: 40px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.viz-section h2 {
+  font-size: 28px;
+  margin-bottom: 30px;
+  color: #2c3e50;
+  text-align: center;
+}
+
+/* Grille pour les graphiques (2x2 responsive) */
+.chart-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.chart-container {
+  min-height: 400px;
+  background: #fafafa;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+/* Styles spécifiques pour la section market-innovation */
+#market-innovation {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+#market-innovation h2 {
+  color: #1a237e;
+}
+
+#market-innovation .chart-container {
+  background: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+/* Styles spécifiques pour la section social-employment */
+#social-employment {
+  background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+}
+
+#social-employment h2 {
+  color: #6c5ce7;
+}
+
+#social-employment .chart-container {
+  background: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+/* Header styles */
+.site-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  text-align: center;
+  padding: 60px 20px;
+  margin-bottom: 40px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.site-header h1 {
+  font-size: 42px;
+  margin-bottom: 20px;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.site-header .intro {
+  font-size: 18px;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.8;
+  opacity: 0.95;
+}
+
+/* Visual separators between sections */
+.viz-section {
+  position: relative;
+  border-top: 3px solid #e0e0e0;
+  margin-top: 20px;
+}
+
+.viz-section:first-of-type {
+  border-top: none;
+}
+
+#market-innovation {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+#social-employment {
+  background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+  margin-top: 40px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .site-header h1 {
+    font-size: 28px;
+  }
+  
+  .site-header .intro {
+    font-size: 16px;
+  }
+  
+  .site-header {
+    padding: 40px 15px;
+  }
+  
+  .chart-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .viz-section {
+    padding: 15px;
+  }
+  
+  .viz-section h2 {
+    font-size: 22px;
+  }
+  
+  .chart-container {
+    min-height: 300px;
+  }
+}

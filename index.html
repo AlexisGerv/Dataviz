@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <script src="src/dependancies/d3.min.js" defer></script>
+  <script src="src/dependancies/plotly-2.14.0.min.js" defer></script>
+  <script type="module" src="src/index.js" defer></script>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+  <header>
+    <h1>Les impacts économiques et stratégiques de l’IA</h1>
+  </header>
+
+  <main>
+    <section>
+      <h2>1. Thème : Dynamique du marché et innovation</h2>
+      <h3>Objectif : comprendre comment l’adoption et la production liée à l’IA influencent la performance économique et
+        la domination du marché.</h3>
+
+      <p>Le volume de contenu IA généré (en TB/an) est-il corrélé à la part de marché des entreprises IA (%) ?</p>
+      <div id="scatterplotaicontentvsmarketshare"></div>
+      <!-- Scatter plot : AI-Generated Content Volume vs Market Share of AI Companies (corrélation directe). -->
+
+      <p>Les pays les plus productifs sont-ils aussi ceux avec un taux d’adoption élevé ?</p>
+      <div id="barchartaiadoptionvscontentvolume"></div>
+      <!-- Bar chart groupé par pays ou industrie : comparer AI Adoption Rate et Content Volume. -->
+
+      <p>Certains outils IA (Midjourney, DALL·E, etc.) sont-ils plus associés à des hausse de revenus ou à des parts de
+        marché plus fortes ?</p>
+      <div id="box-plot-revenue-vs-ai-tools"></div>
+      <!-- Box plot : comparaison des revenus selon le Top AI Tools Used. -->
+
+      <p>Comment les industries varient-elles en termes de volume de contenu IA généré et de part de marché ?</p>
+      <div id="heatmap-country-industry-ai-volume-market-share"></div>
+      <!-- Heatmap : pays vs industries, coloration selon volume IA et part de marché. -->
+    </section>
+
+    <section>
+      <h2>2. Thème : Effets sociaux et emploi</h2>
+      <h3>Objectif : analyser l’impact humain de l’intégration de l’IA dans les entreprises.</h3>
+
+      <p>Le taux de perte d’emploi dû à l’IA augmente-t-il avec le taux d’adoption de l’IA ?</p>
+      <div id="scatter-plot-ai-adoption-vs-job-loss"></div>
+      <!-- Scatter plot : AI Adoption Rate vs Job Loss Due to AI (corrélation positive ou négative). -->
+
+      <p>Une forte collaboration humain-IA permet-elle de réduire les pertes d’emploi ?</p>
+      <div id="scatter-plot-human-ai-collaboration-vs-job-loss"></div>
+      <!-- Scatter plot : Human-AI Collaboration Rate vs Job Loss Due to AI (corrélation inverse attendue). -->
+
+      <p>Certaines industries présentent-elles une meilleure collaboration humain-IA que d’autres ?</p>
+      <div id="bar-chart-human-ai-collaboration-by-industry"></div>
+      <!-- Bar chart par industrie : moyenne de la collaboration humain-IA. -->
+
+      <p>Quels pays montrent les plus fortes pertes d’emploi liées à l’IA ?</p>
+      <div id="choropleth-job-loss-by-country"></div>
+      <!-- Carte choroplèthe : pays colorés selon le taux de perte d’emploi dû à l’IA. -->
+    </section>
+
+    <div id="plot"></div>
+  </main>
+
+  <footer>
+    <p>Lien vers le dataset utilisé : <a href="https://www.kaggle.com/datasets/atharvasoundankar/impact-of-ai-on-digital-media-2020-2025" target="_blank">https://www.kaggle.com/datasets/atharvasoundankar/impact-of-ai-on-digital-media-2020-2025</a></p>
+
+    <p>Réalisé par : Alexis GERVAUD</p>
+  </footer>
+</body>
+
+</html>
