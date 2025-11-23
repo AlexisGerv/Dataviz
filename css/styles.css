@@ -1,4 +1,24 @@
-/* Base styles pour la page */
+:root {
+  /* Palette de couleurs - Dark Theme */
+  --bg-dark: #0f172a;
+  --bg-card: #1e293b;
+  --bg-card-hover: #334155;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --accent-primary: #38bdf8; /* Sky 400 */
+  --accent-secondary: #818cf8; /* Indigo 400 */
+  --accent-glow: rgba(56, 189, 248, 0.5);
+  
+  /* Gradients */
+  --gradient-hero: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+  --gradient-card: linear-gradient(145deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.6));
+  
+  /* Spacing & Layout */
+  --container-width: 1440px;
+  --header-height: 400px;
+  --card-radius: 16px;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -6,148 +26,194 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
   line-height: 1.6;
-  color: #333;
-  background-color: #f5f5f5;
+  overflow-x: hidden;
+}
+
+/* Typography */
+h1, h2, h3 {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 3.5rem;
+  background: linear-gradient(to right, #fff, #94a3b8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 2rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+  color: var(--accent-primary);
+  margin-bottom: 0.5rem;
+}
+
+p {
+  color: var(--text-secondary);
+}
+
+a {
+  color: var(--accent-primary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: var(--accent-secondary);
+}
+
+/* Layout */
+.app-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 main {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 20px;
+  max-width: var(--container-width);
+  margin: -100px auto 0;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 10;
+  width: 100%;
 }
 
-/* Styles pour les sections de visualisation */
-.viz-section {
-  background: white;
-  padding: 30px;
-  margin-bottom: 40px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.viz-section h2 {
-  font-size: 28px;
-  margin-bottom: 30px;
-  color: #2c3e50;
+/* Hero Section */
+.hero-section {
+  height: var(--header-height);
+  background: var(--gradient-hero);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
+  padding: 0 2rem;
+  overflow: hidden;
 }
 
-/* Grille pour les graphiques (2x2 responsive) */
-.chart-grid {
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -20%;
+  width: 80%;
+  height: 200%;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+  opacity: 0.15;
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  transform: translateY(-20px);
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  max-width: 600px;
+  margin: 0 auto;
+  opacity: 0.9;
+}
+
+/* Viz Sections */
+.viz-section {
+  margin-bottom: 4rem;
+}
+
+.section-header {
+  margin-bottom: 2rem;
+  padding-left: 1rem;
+  border-left: 4px solid var(--accent-secondary);
+}
+
+.section-desc {
+  font-size: 1.1rem;
+  max-width: 800px;
+}
+
+/* Charts Grid */
+.charts-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  gap: 2rem;
+}
+
+.chart-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--card-radius);
+  padding: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.chart-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.chart-question {
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  font-style: italic;
+  opacity: 0.8;
 }
 
 .chart-container {
+  width: 100%;
   min-height: 400px;
-  background: #fafafa;
-  border-radius: 4px;
-  padding: 10px;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
-/* Styles spécifiques pour la section market-innovation */
-#market-innovation {
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-}
-
-#market-innovation h2 {
-  color: #1a237e;
-}
-
-#market-innovation .chart-container {
-  background: white;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
-}
-
-/* Styles spécifiques pour la section social-employment */
-#social-employment {
-  background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
-}
-
-#social-employment h2 {
-  color: #6c5ce7;
-}
-
-#social-employment .chart-container {
-  background: white;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
-}
-
-/* Header styles */
-.site-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+/* Footer */
+footer {
   text-align: center;
-  padding: 60px 20px;
-  margin-bottom: 40px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 3rem 0;
+  margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  background: #0b1120;
 }
 
-.site-header h1 {
-  font-size: 42px;
-  margin-bottom: 20px;
-  font-weight: 700;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.site-header .intro {
-  font-size: 18px;
-  max-width: 800px;
-  margin: 0 auto;
-  line-height: 1.8;
-  opacity: 0.95;
-}
-
-/* Visual separators between sections */
-.viz-section {
-  position: relative;
-  border-top: 3px solid #e0e0e0;
-  margin-top: 20px;
-}
-
-.viz-section:first-of-type {
-  border-top: none;
-}
-
-#market-innovation {
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-}
-
-#social-employment {
-  background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
-  margin-top: 40px;
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-  .site-header h1 {
-    font-size: 28px;
-  }
-  
-  .site-header .intro {
-    font-size: 16px;
-  }
-  
-  .site-header {
-    padding: 40px 15px;
-  }
-  
-  .chart-grid {
+/* Responsive */
+@media (max-width: 1024px) {
+  .charts-grid {
     grid-template-columns: 1fr;
   }
   
-  .viz-section {
-    padding: 15px;
+  h1 {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  main {
+    padding: 0 1rem;
   }
   
-  .viz-section h2 {
-    font-size: 22px;
+  .hero-section {
+    height: auto;
+    padding: 4rem 1rem 8rem;
   }
   
-  .chart-container {
-    min-height: 300px;
+  h1 {
+    font-size: 2rem;
   }
 }
