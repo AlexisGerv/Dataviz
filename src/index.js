@@ -7,26 +7,26 @@ const commonLayout = {
   paper_bgcolor: "rgba(0,0,0,0)",
   font: {
     family: "Inter, sans-serif",
-    color: "#f8fafc",
+    color: "#1e293b", // Slate 800
   },
   xaxis: {
-    gridcolor: "#334155",
-    zerolinecolor: "#334155",
+    gridcolor: "#e2e8f0", // Slate 200
+    zerolinecolor: "#e2e8f0",
     tickfont: {
-      color: "#94a3b8",
+      color: "#64748b", // Slate 500
     },
     titlefont: {
-      color: "#f8fafc",
+      color: "#1e293b",
     },
   },
   yaxis: {
-    gridcolor: "#334155",
-    zerolinecolor: "#334155",
+    gridcolor: "#e2e8f0",
+    zerolinecolor: "#e2e8f0",
     tickfont: {
-      color: "#94a3b8",
+      color: "#64748b",
     },
     titlefont: {
-      color: "#f8fafc",
+      color: "#1e293b",
     },
   },
   margin: {
@@ -36,10 +36,10 @@ const commonLayout = {
     l: 60,
   },
   hoverlabel: {
-    bgcolor: "#1e293b",
-    bordercolor: "#38bdf8",
+    bgcolor: "#ffffff",
+    bordercolor: "#e2e8f0",
     font: {
-      color: "#f8fafc",
+      color: "#1e293b",
     },
   },
 };
@@ -189,7 +189,7 @@ function ScatterPlotAiContentsMarketShare(rows) {
         opacity: 0.8,
         line: {
           width: 1,
-          color: "#f8fafc",
+          color: "#ffffff",
         },
       },
       text: country.map(
@@ -287,7 +287,7 @@ function BarChartAiAdoptionVsContentVolume(rows) {
       name: "Augmentation des revenus (%)",
       type: "bar",
       marker: {
-        color: "#38bdf8",
+        color: "#2563eb", // Blue 600
       },
       hovertemplate: "%{x}<br>Revenus : %{y}%<extra></extra>",
     },
@@ -297,7 +297,7 @@ function BarChartAiAdoptionVsContentVolume(rows) {
       name: "Taux d'adoption de l'IA (%)",
       type: "bar",
       marker: {
-        color: "#818cf8",
+        color: "#4f46e5", // Indigo 600
       },
       hovertemplate: "%{x}<br>Adoption : %{y}%<extra></extra>",
     },
@@ -313,7 +313,7 @@ function BarChartAiAdoptionVsContentVolume(rows) {
       orientation: "h",
       y: -0.2,
       font: {
-        color: "#94a3b8",
+        color: "#64748b",
       },
     },
     margin: { t: 20, r: 20, b: 60, l: 60 },
@@ -344,7 +344,7 @@ function BoxPlotRevenueVsAiTools(rows) {
       x: tools,
       type: "box",
       marker: {
-        color: "#38bdf8",
+        color: "#2563eb",
       },
       boxpoints: "all",
       jitter: 0.3,
@@ -384,10 +384,10 @@ function HeatmapCountryIndustryAiVolume(rows) {
       colorbar: {
         title: "Volume (TB)",
         titlefont: {
-          color: "#f8fafc",
+          color: "#1e293b",
         },
         tickfont: {
-          color: "#94a3b8",
+          color: "#64748b",
         },
       },
     },
@@ -443,10 +443,10 @@ function BarChartAiAdoptionVsJobLoss(rows) {
         colorbar: {
           title: "Taux d'adoption (%)",
           titlefont: {
-            color: "#f8fafc",
+            color: "#1e293b",
           },
           tickfont: {
-            color: "#94a3b8",
+            color: "#64748b",
           },
         },
       },
@@ -492,10 +492,10 @@ function ScatterPlotHumanAiCollaborationVsJobLoss(rows) {
       text: countries,
       marker: {
         size: 10,
-        color: "#818cf8",
+        color: "#4f46e5", // Indigo 600
         line: {
           width: 1,
-          color: "#f8fafc",
+          color: "#ffffff",
         },
       },
     },
@@ -600,17 +600,17 @@ function ChoroplethJobLossByCountry(rows) {
       reversescale: false,
       marker: {
         line: {
-          color: "rgb(180,180,180)",
+          color: "rgb(255,255,255)",
           width: 0.5,
         },
       },
       colorbar: {
         title: "Perte d'emploi (%)",
         titlefont: {
-          color: "#f8fafc",
+          color: "#1e293b",
         },
         tickfont: {
-          color: "#94a3b8",
+          color: "#64748b",
         },
       },
     },
@@ -627,8 +627,8 @@ function ChoroplethJobLossByCountry(rows) {
       },
       bgcolor: "rgba(0,0,0,0)",
       lakecolor: "rgba(0,0,0,0)",
-      landcolor: "#1e293b",
-      subunitcolor: "#334155",
+      landcolor: "#f1f5f9", // Slate 100
+      subunitcolor: "#cbd5e1", // Slate 300
     },
     margin: { t: 0, r: 0, b: 0, l: 0 },
   };
@@ -687,6 +687,15 @@ function setupModal() {
           Plotly.newPlot(chartArea, originalChartData, newLayout, {
             responsive: true,
             displayModeBar: true,
+          }).then(() => {
+            // Fix: Force explicit resize to ensure chart fills the container
+            Plotly.Plots.resize(chartArea);
+            
+            // Double check with relayout for strict sizing
+            Plotly.relayout(chartArea, {
+              width: chartArea.clientWidth,
+              height: chartArea.clientHeight
+            });
           });
         }
       }, 50); // 50ms is usually enough for display:flex to compute
