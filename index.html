@@ -10,7 +10,9 @@
   <script type="module" src="src/index.js" defer></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@700;900&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@700;900&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 
@@ -22,13 +24,32 @@
         <p class="hero-subtitle">Analyse de la dynamique du marché, de l'innovation et des effets sociaux</p>
       </div>
       <div class="hero-background"></div>
+      <p>Données : <a href="https://www.kaggle.com/datasets/atharvasoundankar/impact-of-ai-on-digital-media-2020-2025"
+          target="_blank">Kaggle Dataset</a></p>
+      <p>
+      <ul>
+        <li>AI-Generated Content Volume (TBs per year) : Volume de contenu IA généré par an en Terabyte</li>
+        <li>Job Loss Due to AI (%) : Perte d'emploi due à l'IA en pourcentage</li>
+        <li>Revenue Increase Due to AI (%) : Augmentation des revenus due à l'IA en pourcentage</li>
+        <li>Human-AI Collaboration Rate (%) : Taux de collaboration entre l'homme et l'IA en pourcentage</li>
+        <li>Market Share of AI Companies (%) : Part de marché des entreprises IA en pourcentage</li>
+        <li>Regulation Status : Statut de réglementation</li>
+        <li>Consumer Trust in AI (%) : Confiance des consommateurs en IA en pourcentage</li>
+        <li>Top AI Tools Used : Meilleurs outils IA utilisés</li>
+        <li>AI Adoption Rate (%) : Taux d'adoption de l'IA en pourcentage</li>
+        <li>Industry : Industrie</li>
+        <li>Year : Année</li>
+        <li>Country : Pays</li>
+      </ul>
+      </p>
     </header>
 
     <main>
       <section class="viz-section" id="market-innovation">
         <div class="section-header">
           <h2>1. Dynamique du marché et innovation</h2>
-          <p class="section-desc">Comprendre comment l’adoption et la production liée à l’IA influencent la performance économique et la domination du marché.</p>
+          <p class="section-desc">Comprendre comment l’adoption et la production liée à l’IA influencent la performance
+            économique et la domination du marché.</p>
         </div>
 
         <div class="charts-grid">
@@ -40,7 +61,8 @@
 
           <div class="chart-card">
             <h3>Adoption vs Production</h3>
-            <p class="chart-question">Les pays les plus productifs sont-ils aussi ceux avec un taux d’adoption élevé ?</p>
+            <p class="chart-question">Les pays les plus productifs sont-ils aussi ceux avec un taux d’adoption élevé ?
+            </p>
             <div id="barchartaiadoptionvscontentvolume" class="chart-container"></div>
           </div>
 
@@ -87,13 +109,14 @@
             <h3>Carte des pertes d'emploi</h3>
             <p class="chart-question">Quels pays sont les plus touchés ?</p>
             <div id="choropleth-job-loss-by-country" class="chart-container"></div>
+            <p>Le jeu de données ne couvre pas tous les pays.Tout pays ne s'affichant pas sur cette carte ne singnifie
+              pas qu'il n'y a pas de pertes d'emploi. </p>
           </div>
         </div>
       </section>
     </main>
 
     <footer>
-      <p>Données : <a href="https://www.kaggle.com/datasets/atharvasoundankar/impact-of-ai-on-digital-media-2020-2025" target="_blank">Kaggle Dataset</a></p>
       <p>Réalisé par Alexis GERVAUD</p>
     </footer>
   </div>
