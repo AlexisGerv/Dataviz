@@ -19,29 +19,87 @@
 <body>
   <div class="app-container">
     <header class="hero-section">
-      <div class="hero-content">
-        <h1>Les impacts économiques <br>et stratégiques de l’IA</h1>
-        <p class="hero-subtitle">Analyse de la dynamique du marché, de l'innovation et des effets sociaux</p>
-      </div>
       <div class="hero-background"></div>
-      <p>Données : <a href="https://www.kaggle.com/datasets/atharvasoundankar/impact-of-ai-on-digital-media-2020-2025"
-          target="_blank">Kaggle Dataset</a></p>
-      <p>
-      <ul>
-        <li>AI-Generated Content Volume (TBs per year) : Volume de contenu IA généré par an en Terabyte</li>
-        <li>Job Loss Due to AI (%) : Perte d'emploi due à l'IA en pourcentage</li>
-        <li>Revenue Increase Due to AI (%) : Augmentation des revenus due à l'IA en pourcentage</li>
-        <li>Human-AI Collaboration Rate (%) : Taux de collaboration entre l'homme et l'IA en pourcentage</li>
-        <li>Market Share of AI Companies (%) : Part de marché des entreprises IA en pourcentage</li>
-        <li>Regulation Status : Statut de réglementation</li>
-        <li>Consumer Trust in AI (%) : Confiance des consommateurs en IA en pourcentage</li>
-        <li>Top AI Tools Used : Meilleurs outils IA utilisés</li>
-        <li>AI Adoption Rate (%) : Taux d'adoption de l'IA en pourcentage</li>
-        <li>Industry : Industrie</li>
-        <li>Year : Année</li>
-        <li>Country : Pays</li>
-      </ul>
-      </p>
+
+      <div class="hero-layout">
+        <!-- Left Column: Title & Intro -->
+        <div class="hero-left">
+          <div class="hero-title-block">
+            <h1>Les impacts économiques <br>et stratégiques de l’IA</h1>
+            <p class="hero-subtitle">Analyse de la dynamique du marché, de l'innovation et des effets sociaux</p>
+          </div>
+
+          <div class="intro-container">
+            <p class="data-source">Source des données : <a
+                href="https://www.kaggle.com/datasets/atharvasoundankar/impact-of-ai-on-digital-media-2020-2025"
+                target="_blank" class="source-link">Kaggle Dataset <svg xmlns="http://www.w3.org/2000/svg" width="12"
+                  height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg></a></p>
+
+            <p class="intro-text">
+              Cet ensemble de données explore l'influence du contenu généré par l'IA dans divers secteurs (journalisme,
+              réseaux sociaux, divertissement, marketing). Il offre une vue d'ensemble sur l'opinion publique, l'impact
+              économique et les réponses réglementaires face à l'essor de l'IA.
+            </p>
+
+            <div class="warning-box">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+              <p>Note : Le jeu de données est partiel géographiquement. L'absence de données pour un pays ne signifie
+                pas une absence d'impact.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Glossary -->
+        <div class="hero-right">
+          <div class="glossary-section">
+            <h3>Lexique des Données</h3>
+            <div class="glossary-grid">
+              <div class="glossary-item">
+                <span class="term">AI Content Volume</span>
+                <span class="def">Volume annuel en Terabytes</span>
+              </div>
+              <div class="glossary-item">
+                <span class="term">Job Loss (%)</span>
+                <span class="def">Perte d'emploi due à l'IA</span>
+              </div>
+              <div class="glossary-item">
+                <span class="term">Revenue Increase (%)</span>
+                <span class="def">Hausse des revenus liée à l'IA</span>
+              </div>
+              <div class="glossary-item">
+                <span class="term">Human-AI Collab (%)</span>
+                <span class="def">Taux de collaboration</span>
+              </div>
+              <div class="glossary-item">
+                <span class="term">Market Share (%)</span>
+                <span class="def">Part de marché des entreprises IA</span>
+              </div>
+              <div class="glossary-item">
+                <span class="term">Regulation Status</span>
+                <span class="def">État de la réglementation</span>
+              </div>
+              <div class="glossary-item">
+                <span class="term">Consumer Trust (%)</span>
+                <span class="def">Confiance des consommateurs</span>
+              </div>
+              <div class="glossary-item">
+                <span class="term">AI Adoption Rate (%)</span>
+                <span class="def">Taux d'adoption global</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </header>
 
     <main>
@@ -119,6 +177,23 @@
     <footer>
       <p>Réalisé par Alexis GERVAUD</p>
     </footer>
+  </div>
+  <!-- Modal Overlay -->
+  <div id="graph-modal" class="modal-overlay">
+    <div class="modal-content">
+      <button id="modal-close" class="modal-close">&times;</button>
+      <div class="modal-body">
+        <div id="modal-chart-area" class="modal-chart-column">
+          <!-- Chart will be injected here -->
+        </div>
+        <div id="modal-text-area" class="modal-text-column">
+          <h2 id="modal-title">Titre du Graphique</h2>
+          <div id="modal-description">
+            <!-- Description will be injected here -->
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </body>
 
