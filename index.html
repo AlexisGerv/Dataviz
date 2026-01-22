@@ -1,325 +1,281 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Impacts de l'IA - Dataviz</title>
-  <script src="src/dependancies/d3.min.js" defer></script>
-  <script src="src/dependancies/plotly-2.14.0.min.js" defer></script>
-  <script type="module" src="src/index.js" defer></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@700;900&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impact de l'IA - Analyse Globale</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Plotly CDN -->
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
 </head>
-
 <body>
-  <div class="app-container">
-    <header class="hero-section">
-      <div class="hero-background"></div>
 
-      <div class="hero-layout">
-        <!-- Left Column: Title & Intro -->
-        <div class="hero-left">
-          <div class="hero-title-block">
-            <h1>Les impacts économiques <br>et stratégiques de l’IA</h1>
-            <p class="hero-subtitle">Analyse de la dynamique du marché, de l'innovation et des effets sociaux</p>
-          </div>
-
-          <div class="intro-container">
-            <p class="data-source">Source des données : <a
-                href="https://www.kaggle.com/datasets/atharvasoundankar/impact-of-ai-on-digital-media-2020-2025"
-                target="_blank" class="source-link">Kaggle Dataset <svg xmlns="http://www.w3.org/2000/svg" width="12"
-                  height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                  <polyline points="15 3 21 3 21 9"></polyline>
-                  <line x1="10" y1="14" x2="21" y2="3"></line>
-                </svg></a></p>
-
-            <p class="intro-text">
-              Cet ensemble de données explore l'influence du contenu généré par l'IA dans divers secteurs (journalisme,
-              réseaux sociaux, divertissement, marketing). Il offre une vue d'ensemble sur l'opinion publique, l'impact
-              économique et les réponses réglementaires face à l'essor de l'IA.
-            </p>
-
-            <div class="warning-box">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="12" y1="8" x2="12" y2="12"></line>
-                <line x1="12" y1="16" x2="12.01" y2="16"></line>
-              </svg>
-              <p>Note : Le jeu de données est partiel géographiquement. L'absence de données pour un pays ne signifie
-                pas une absence d'impact.</p>
+    <header class="banniere-hero">
+        <div class="conteneur">
+            <h1 class="titre-principal">L'Ère de l'Intelligence Artificielle</h1>
+            <p class="sous-titre">Analyse de l'impact Économique et Social (2020-2025)</p>
+            <div class="conteneur-indicateurs">
+                <div class="carte-indicateur">
+                    <span class="valeur-indicateur" id="indicateur-volume">---</span>
+                    <span class="libelle-indicateur">Volume Contenu IA (TB)</span>
+                </div>
+                <div class="carte-indicateur">
+                    <span class="valeur-indicateur" id="indicateur-adoption">---</span>
+                    <span class="libelle-indicateur">Adoption Moyenne</span>
+                </div>
+                <div class="carte-indicateur">
+                    <span class="valeur-indicateur" id="indicateur-emplois">---</span>
+                    <span class="libelle-indicateur">Impact Emploi Global</span>
+                </div>
             </div>
-          </div>
-        </div>
 
-        <!-- Right Column: Glossary -->
-        <div class="hero-right">
-          <div class="glossary-section">
-            <h3>Lexique des Données</h3>
-            <div class="glossary-grid">
-              <div class="glossary-item">
-                <span class="term">AI Content Volume</span>
-                <span class="def">Volume annuel en Terabytes</span>
-              </div>
-              <div class="glossary-item">
-                <span class="term">Job Loss (%)</span>
-                <span class="def">Perte d'emploi due à l'IA</span>
-              </div>
-              <div class="glossary-item">
-                <span class="term">Revenue Increase (%)</span>
-                <span class="def">Hausse des revenus liée à l'IA</span>
-              </div>
-              <div class="glossary-item">
-                <span class="term">Human-AI Collab (%)</span>
-                <span class="def">Taux de collaboration</span>
-              </div>
-              <div class="glossary-item">
-                <span class="term">Market Share (%)</span>
-                <span class="def">Part de marché des entreprises IA</span>
-              </div>
-              <div class="glossary-item">
-                <span class="term">Regulation Status</span>
-                <span class="def">État de la réglementation</span>
-              </div>
-              <div class="glossary-item">
-                <span class="term">Consumer Trust (%)</span>
-                <span class="def">Confiance des consommateurs</span>
-              </div>
-              <div class="glossary-item">
-                <span class="term">AI Adoption Rate (%)</span>
-                <span class="def">Taux d'adoption global</span>
-              </div>
+            <div class="infos-supplementaires">
+                <h4 class="titre-definitions">Glossaire des Données</h4>
+                <div class="definitions-kpi">
+                    <p><span class="badge-info">Pays / Année</span> Zone géographique et période temporelle (2021-2025) de l'étude.</p>
+                    <p><span class="badge-info">Industrie</span> Secteur économique observé (ex: Tech, Finance, Santé).</p>
+                    <p><span class="badge-info">Taux d'Adoption IA (%)</span> Pourcentage d'intégration de l'IA dans les processus métier.</p>
+                    <p><span class="badge-info">Volume Contenu IA (TB)</span> Quantité annuelle de données générées artificiellement.</p>
+                    <p><span class="badge-info">Pertes d'Emploi (%)</span> Part des emplois supprimés ou transformés radicalement par l'automatisation.</p>
+                    <p><span class="badge-info">Augmentation Revenus (%)</span> Hausse du chiffre d'affaires attribuée directement à l'usage de l'IA.</p>
+                    <p><span class="badge-info">Collaboration Humain-IA (%)</span> Proportion de tâches réalisées en synergie homme-machine.</p>
+                    <p><span class="badge-info">Outils IA</span> Modèles ou plateformes prédominants utilisés (ex: modèles génératifs).</p>
+                    <p><span class="badge-info">Régulation</span> Niveau de sévérité du cadre légal (Strict / Modéré / Souple).</p>
+                    <p><span class="badge-info">Confiance Consommateur (%)</span> Indice d'acceptation du public envers les contenus IA.</p>
+                    <p><span class="badge-info">Part de Marché (%)</span> Dominance économique des acteurs utilisant ces technologies.</p>
+                </div>
+                
+                <div class="source-donnees">
+                    <p>Cet ensemble de données explore l'influence du contenu généré par l'IA dans divers secteurs (journalisme, réseaux sociaux, divertissement, marketing). Il offre une vue d'ensemble sur l'opinion publique, l'impact économique et les réponses réglementaires face à l'essor de l'IA.</p>
+                    <p class="note-dataset"><em>Note : Le jeu de données est partiel géographiquement. L'absence de données pour un pays ne signifie pas une absence d'impact.</em></p>
+                    <p class="lien-source">Source des données : <a href="https://www.kaggle.com/datasets/atharvasoundankar/impact-of-ai-on-digital-media-2020-2025" target="_blank" rel="noopener noreferrer">Kaggle Dataset</a></p>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </header>
 
-    <main>
-      <section class="viz-section" id="market-innovation">
-        <div class="section-header">
-          <h2>1. Dynamique du marché et innovation</h2>
-          <p class="section-desc">Comprendre comment l’adoption et la production liée à l’IA influencent la performance
-            économique et la domination du marché.</p>
-        </div>
+    <main class="conteneur">
+        
+        <!-- Bloc Introductif Narratif -->
+        <section class="intro-globale">
+            <h2>Comprendre la Révolution en Cours</h2>
+            <p>
+                L'intégration de l'Intelligence Artificielle n'est plus une simple tendance technologique, mais un véritable séisme économique et sociétal. 
+                Mais au-delà du buzz, quels sont les chiffres réels ? L'IA détruit-elle massivement des emplois ou rebat-elle simplement les cartes de la productivité ?
+            </p>
+            <p>
+                Ce tableau de bord interactif vous invite à explorer les données pour forger votre propre opinion.
+                <span class="encourage-exploration">Cliquez sur l'icône <span class="icone-inline">⤢</span> de chaque graphique pour découvrir l'analyse approfondie.</span>
+            </p>
+        </section>
 
-        <div class="charts-grid">
-          <!-- Card 1 -->
-          <div class="chart-card">
-            <div class="chart-content">
-              <div id="scatterplotaicontentvsmarketshare" class="chart-container"></div>
-            </div>
-            <div class="chart-info">
-              <h3>Volume vs Part de Marché</h3>
-              <p class="chart-synopsis">
-                Plus une entreprise génère de contenu IA, plus sa part de marché tend à augmenter.
-                Les géants de la Tech dominent clairement ce rapport de force.
-              </p>
-              <div class="chart-click-hint">
-                <span>Cliquez pour analyser</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M5 12h14"></path>
-                  <path d="M12 5l7 7-7 7"></path>
-                </svg>
-              </div>
-            </div>
-          </div>
+        <!-- Section A: Economie -->
+        <section class="section-tableau-bord">
+            <h2 class="titre-section">Dynamique du Marché & Économie</h2>
+            <p class="intro-section">
+                L'adoption de l'IA est-elle directement corrélée à la performance financière ? 
+                Cette section analyse comment le volume de contenu généré et le choix des outils influencent la part de marché et la croissance des revenus.
+            </p>
+            <div class="conteneur-grille">
+                <!-- Graphique 1 -->
+                <article class="carte">
+                    <div class="entete-carte">
+                        <h3>Volume vs Part de Marché</h3>
+                        <button class="bouton-agrandir" data-graphique="graphique1" aria-label="Agrandir">⤢</button>
+                    </div>
+                    <div id="graphique1" class="conteneur-graphique"></div>
+                    <div class="pied-carte">
+                        <p class="desc-courte">Corrélation entre la production de contenu IA et la dominance du marché.</p>
+                        <div class="analyse-complete cache">
+                            <h4>Le Piège du "Milieu de Gué"</h4>
+                            <p><strong>Le constat :</strong> La courbe de part de marché ondule de manière surprenante. On observe une bonne performance avec des volumes faibles (10-20 TB/an), un décrochage net à volume moyen (40-50 TB/an), puis une remontée forte à haut volume (80-90 TB/an).</p>
+                            <p><strong>L'analyse :</strong> Positionnement intermédiaire dangereux.</p>
+                            <ul>
+                                <li><strong>L'agilité (10-20 TB) :</strong> La qualité prime sur la quantité pour les projets ciblés.</li>
+                                <li><strong>Zone de danger (40-50 TB) :</strong> Trop gros pour être agile, trop petit pour dominer. Le bruit surpasse le signal.</li>
+                                <li><strong>Industrialisation (80-90 TB) :</strong> Le "Sweet Spot" de l'échelle industrielle efficace.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
 
-          <!-- Card 2 -->
-          <div class="chart-card">
-            <div class="chart-content">
-              <div id="barchartaiadoptionvscontentvolume" class="chart-container"></div>
-            </div>
-            <div class="chart-info">
-              <h3>Adoption vs Revenus</h3>
-              <p class="chart-synopsis">
-                L'adoption de l'IA est un levier de croissance direct.
-                Les pays qui intègrent massivement ces technologies voient leurs revenus augmenter significativement.
-              </p>
-              <div class="chart-click-hint">
-                <span>Cliquez pour analyser</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M5 12h14"></path>
-                  <path d="M12 5l7 7-7 7"></path>
-                </svg>
-              </div>
-            </div>
-          </div>
+                <!-- Graphique 2 -->
+                <article class="carte">
+                    <div class="entete-carte">
+                        <h3>Impact sur les Revenus</h3>
+                        <button class="bouton-agrandir" data-graphique="graphique2" aria-label="Agrandir">⤢</button>
+                    </div>
+                    <div id="graphique2" class="conteneur-graphique"></div>
+                    <div class="pied-carte">
+                        <p class="desc-courte">Lien entre taux d'adoption de l'IA et augmentation des revenus.</p>
+                        <div class="analyse-complete cache">
+                            <h4>La Courbe en "J" de l'Adoption</h4>
+                            <p><strong>Le constat :</strong> L'impact sur les revenus ne suit pas une ligne droite. Il commence haut, chute brutalement vers 20% d'adoption, puis remonte pour se stabiliser.</p>
+                            <p><strong>L'analyse (Coût d'apprentissage) :</strong></p>
+                            <ul>
+                                <li><strong>Démarrage (0-10%) :</strong> Gains rapides ("Quick Wins").</li>
+                                <li><strong>Le "Dur" (20%) :</strong> Réorganisation, coûts techniques, friction. La rentabilité chute.</li>
+                                <li><strong>Maturité (30-40%) :</strong> La transformation porte ses fruits durables. Ne pas arrêter l'investissement au creux de la vague !</li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
 
-          <!-- Card 3 -->
-          <div class="chart-card">
-            <div class="chart-content">
-              <div id="box-plot-revenue-vs-ai-tools" class="chart-container"></div>
+                <!-- Graphique 3 -->
+                <article class="carte etendue-2">
+                    <div class="entete-carte">
+                        <h3>Performance des Outils IA</h3>
+                        <button class="bouton-agrandir" data-graphique="graphique3" aria-label="Agrandir">⤢</button>
+                    </div>
+                    <div id="graphique3" class="conteneur-graphique"></div>
+                    <div class="pied-carte">
+                        <p class="desc-courte">Comparaison de la rentabilité générée par les différents modèles d'IA majeurs.</p>
+                        <div class="analyse-complete cache">
+                            <h4>La Matrice Risque/Rendement des Modèles</h4>
+                            <p><strong>Le constat :</strong> Le Box Plot montre la dispersion des résultats. Une grande "boîte" signifie un résultat incertain.</p>
+                            <p><strong>L'analyse :</strong></p>
+                            <ul>
+                                <li><strong>Valeurs sûres (ChatGPT, Claude) :</strong> Boîtes compactes et hautes. Retour sur investissement fiable, peu de risques.</li>
+                                <li><strong>Paris à haut potentiel (Synthesia) :</strong> Boîte immense. Gains potentiels massifs mais risque d'échec élevé selon la compétence.</li>
+                            </ul>
+                            <p style="margin-top:5px;"><strong>Stratégie :</strong> Misez sur les LLM pour stabiliser, et osez la vidéo pour disrupter.</p>
+                        </div>
+                    </div>
+                </article>
             </div>
-            <div class="chart-info">
-              <h3>Performance des Outils IA</h3>
-              <p class="chart-synopsis">
-                Tous les outils ne se valent pas. Certains frameworks comme TensorFlow ou PyTorch sont associés à des gains économiques plus marqués.
-              </p>
-              <div class="chart-click-hint">
-                <span>Cliquez pour analyser</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M5 12h14"></path>
-                  <path d="M12 5l7 7-7 7"></path>
-                </svg>
-              </div>
-            </div>
-          </div>
 
-          <!-- Card 4 -->
-          <div class="chart-card">
-            <div class="chart-content">
-              <div id="heatmap-country-industry-ai-volume-market-share" class="chart-container"></div>
+            <div class="bloc-conclusion">
+                <h3>Synthèse Économique</h3>
+                <p>L'analyse économique démontre sans équivoque que l'IA est un vecteur de croissance majeur. Toutefois, l'avantage concurrentiel ne réside pas uniquement dans l'adoption, mais dans l'intensité de l'usage (Volume) et le choix stratégique des outils. Les entreprises qui intègrent l'IA au cœur de leur modèle de production surperforment systématiquement celles qui l'utilisent de manière périphérique.</p>
             </div>
-            <div class="chart-info">
-              <h3>Intensité par Secteur</h3>
-              <p class="chart-synopsis">
-                Une vue d'ensemble des points chauds de l'IA mondiale.
-                Identifiez quels secteurs (Finance, Santé, Tech) pilotent l'innovation dans chaque pays.
-              </p>
-              <div class="chart-click-hint">
-                <span>Cliquez pour analyser</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M5 12h14"></path>
-                  <path d="M12 5l7 7-7 7"></path>
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <section class="viz-section" id="social-employment">
-        <div class="section-header">
-          <h2>2. Effets sociaux et emploi</h2>
-          <p class="section-desc">Analyser l’impact humain de l’intégration de l’IA dans les entreprises.</p>
-        </div>
+        <!-- Section B: Social -->
+        <section class="section-tableau-bord">
+            <h2 class="titre-section">Impact Social & Futur du Travail</h2>
+            <p class="intro-section">
+                L'automatisation est souvent synonyme de crainte pour l'emploi. Cependant, les données racontent une histoire plus nuancée où la collaboration Homme-Machine pourrait être la clé de la résilience.
+                Quels secteurs s'adaptent le mieux ?
+            </p>
+            <div class="conteneur-grille">
+                <!-- Graphique 4 -->
+                <article class="carte">
+                    <div class="entete-carte">
+                        <h3>Adoption vs Emploi</h3>
+                        <button class="bouton-agrandir" data-graphique="graphique4" aria-label="Agrandir">⤢</button>
+                    </div>
+                    <div id="graphique4" class="conteneur-graphique"></div>
+                    <div class="pied-carte">
+                        <p class="desc-courte">Analyse du coût social potentiel de l'automatisation rapide.</p>
+                        <div class="analyse-complete cache">
+                            <h4>La Friction de Transition (Adoption vs Emploi)</h4>
+                            <p><strong>Le Phénomène :</strong> Contrairement aux idées reçues, la perte d'emploi n'explose pas linéairement avec l'adoption (les barres rouges restent relativement stables entre 24% et 27%).</p>
+                            <p><strong>L'Explication :</strong> Ce n'est pas une suppression pure, mais une transformation. Même avec une adoption massive (90%), l'emploi ne s'effondre pas totalement car de nouveaux rôles de supervision apparaissent. Le graphique montre une "friction structurelle" constante : l'humain reste nécessaire pour piloter la machine.</p>
+                        </div>
+                    </div>
+                </article>
 
-        <div class="charts-grid">
-          <!-- Card 5 -->
-          <div class="chart-card">
-            <div class="chart-content">
-              <div id="scatter-plot-ai-adoption-vs-job-loss" class="chart-container"></div>
-            </div>
-            <div class="chart-info">
-              <h3>Adoption vs Emploi</h3>
-              <p class="chart-synopsis">
-                L'adoption massive de l'IA détruit-elle des emplois ?
-                Les données révèlent une réalité nuancée : transformation plutôt que simple destruction.
-              </p>
-              <div class="chart-click-hint">
-                <span>Cliquez pour analyser</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M5 12h14"></path>
-                  <path d="M12 5l7 7-7 7"></path>
-                </svg>
-              </div>
-            </div>
-          </div>
+                <!-- Graphique 5 -->
+                <article class="carte">
+                    <div class="entete-carte">
+                        <h3>L'Effet Protecteur de la Collaboration</h3>
+                        <button class="bouton-agrandir" data-graphique="graphique5" aria-label="Agrandir">⤢</button>
+                    </div>
+                    <div id="graphique5" class="conteneur-graphique"></div>
+                    <div class="pied-carte">
+                        <p class="desc-courte">Relation entre collaboration Humain-IA et préservation de l'emploi.</p>
+                        <div class="analyse-complete cache">
+                            <h4>Le "Golden Ratio" (L'Effet Protecteur de la Collaboration)</h4>
+                            <p><strong>Le Phénomène :</strong> La courbe forme un "W". Le point le plus bas (le moins de perte d'emploi, environ 20%) se situe à 40% de collaboration Humain-IA.</p>
+                            <p><strong>L'Explication :</strong></p>
+                            <ul>
+                                <li><strong>40% (L'Augmentation) :</strong> C'est l'équilibre parfait. L'IA gère les tâches répétitives, l'humain gère la stratégie. L'humain est "augmenté", pas remplacé.</li>
+                                <li><strong>60-70% (La Cannibalisation) :</strong> Si l'intégration de l'IA est trop poussée, elle empiète sur le jugement humain, rendant les processus ingérables ou l'humain obsolète.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
 
-          <!-- Card 6 -->
-          <div class="chart-card">
-            <div class="chart-content">
-              <div id="scatter-plot-human-ai-collaboration-vs-job-loss" class="chart-container"></div>
-            </div>
-            <div class="chart-info">
-              <h3>L'impact de la Collaboration</h3>
-              <p class="chart-synopsis">
-                L'humain au centre de la boucle.
-                Une forte collaboration Humain-IA semble agir comme un bouclier contre la perte sèche d'emplois.
-              </p>
-              <div class="chart-click-hint">
-                <span>Cliquez pour analyser</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M5 12h14"></path>
-                  <path d="M12 5l7 7-7 7"></path>
-                </svg>
-              </div>
-            </div>
-          </div>
+                <!-- Graphique 6 -->
+                <article class="carte">
+                    <div class="entete-carte">
+                        <h3>Secteurs Adaptatifs</h3>
+                        <button class="bouton-agrandir" data-graphique="graphique6" aria-label="Agrandir">⤢</button>
+                    </div>
+                    <div id="graphique6" class="conteneur-graphique"></div>
+                    <div class="pied-carte">
+                        <p class="desc-courte">Profil de collaboration par industrie.</p>
+                        <div class="analyse-complete cache">
+                            <h4>La Chaleur Sectorielle (Secteurs Adaptatifs)</h4>
+                            <p>L'impact est très inégal selon l'industrie.</p>
+                            <ul>
+                                <li><strong>Les Gagnants (Gaming/Marketing) :</strong> Couleurs chaudes sur "Hausse Revenus". L'IA est un levier de monétisation directe.</li>
+                                <li><strong>Les Résilients (Education/Legal) :</strong> Teintes sombres sur "Perte Emploi". Protégés car l'expertise humaine et la responsabilité ne sont pas automatisables.</li>
+                                <li><strong>Les Vulnérables (Retail) :</strong> Teintes claires sur la perte d'emploi. L'automatisation y remplace directement la main-d'œuvre.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
 
-          <!-- Card 7 -->
-          <div class="chart-card">
-            <div class="chart-content">
-              <div id="bar-chart-human-ai-collaboration-by-industry" class="chart-container"></div>
+                <!-- Graphique 7 -->
+                <article class="carte etendue-3">
+                    <div class="entete-carte">
+                        <h3>Géographie de la Résilience</h3>
+                        <button class="bouton-agrandir" data-graphique="graphique7" aria-label="Agrandir">⤢</button>
+                    </div>
+                    <div id="graphique7" class="conteneur-graphique" style="height: 500px;"></div>
+                    <div class="pied-carte">
+                        <p class="desc-courte">Carte mondiale de la résilience de l'emploi face à l'IA.</p>
+                        <div class="analyse-complete cache">
+                            <h4>La Géographie de la Résilience</h4>
+                            <p><strong>Le Phénomène :</strong> Les zones les plus développées technologiquement (USA, Europe de l'Ouest, Australie) sont les plus résilientes (Indice élevé).</p>
+                            <p><strong>L'Explication (Le Paradoxe de l'Innovation) :</strong> On pourrait penser que les pays technologiques perdraient plus d'emplois. C'est l'inverse.</p>
+                            <ul>
+                                <li>Ces pays ont la maturité pour créer de nouveaux métiers (Prompt Engineers, éthiciens) plus vite qu'ils ne détruisent les anciens.</li>
+                                <li>La résilience ne vient pas du protectionnisme, mais de l'innovation.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </article>
             </div>
-            <div class="chart-info">
-              <h3>Collaboration par Secteur</h3>
-              <p class="chart-synopsis">
-                Certains métiers se prêtent mieux à la synergie Homme-Machine.
-                Découvrez quels secteurs favorisent cette approche hybride.
-              </p>
-              <div class="chart-click-hint">
-                <span>Cliquez pour analyser</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M5 12h14"></path>
-                  <path d="M12 5l7 7-7 7"></path>
-                </svg>
-              </div>
-            </div>
-          </div>
 
-          <!-- Card 8 -->
-          <div class="chart-card">
-            <div class="chart-content">
-              <div id="choropleth-job-loss-by-country" class="chart-container"></div>
-              <p class="disclaimer-text">Données partielles. L'absence de couleur ne signifie pas une absence d'impact.</p>
+            <div class="bloc-conclusion">
+                <h3>Synthèse Sociale</h3>
+                <p>Sur le plan social, la corrélation entre adoption et emploi n'est pas fatale. La clé de la résilience réside dans la collaboration Homme-Machine. Les données prouvent que l'automatisation détruit des emplois isolés, mais l'augmentation (synergie) préserve les carrières et transforme les industries. La fracture géographique observée souligne l'urgence de politiques de formation adaptées.</p>
             </div>
-            <div class="chart-info">
-              <h3>Géographie de l'Impact</h3>
-              <p class="chart-synopsis">
-                Une carte mondiale des turbulences de l'emploi.
-                Visualisez les pays les plus résilients et ceux les plus exposés aux ruptures technologiques.
-              </p>
-              <div class="chart-click-hint">
-                <span>Cliquez pour analyser</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M5 12h14"></path>
-                  <path d="M12 5l7 7-7 7"></path>
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
+
+        <section class="conclusion-generale">
+            <h2>Vision 2030 : Vers une Hybridation</h2>
+            <p>En synthèse, la période 2020-2025 marque le passage de l'expérimentation à l'industrialisation de l'IA. Si les bénéfices économiques sont avérés, le coût social est variable et dépend fortement des stratégies de déploiement (Collaboration vs Remplacement) et de la maturité politique des territoires. L'avenir appartient aux acteurs "Hybrides" qui sauront conjuguer puissance de calcul et créativité humaine.</p>
+        </section>
+
     </main>
 
-    <footer>
-      <p>Réalisé par Alexis GERVAUD</p>
+    <footer class="pied-de-page-site">
+        <div class="conteneur">
+            <h3>Et maintenant ?</h3>
+            <p>Ces données ne sont qu'un point de départ. L'avenir du travail dépendra moins de la technologie elle-même que des politiques d'accompagnement et de la capacité des organisations à valoriser la synergie Humain-IA.</p>
+        </div>
     </footer>
-  </div>
-  <!-- Modal Overlay -->
-  <div id="graph-modal" class="modal-overlay">
-    <div class="modal-content">
-      <button id="modal-close" class="modal-close">&times;</button>
-      <div class="modal-body">
-        <div id="modal-chart-area" class="modal-chart-column">
-          <!-- Chart will be injected here -->
-        </div>
-        <div id="modal-text-area" class="modal-text-column">
-          <h2 id="modal-title">Titre du Graphique</h2>
-          <div id="modal-description">
-            <!-- Description will be injected here -->
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</body>
 
+    <!-- Modale -->
+    <div id="modale-detail" class="modale">
+        <div class="contenu-modale">
+            <span class="fermer-modale">&times;</span>
+            <h2 id="titre-modale">Titre du Graphique</h2>
+            <div id="conteneur-graphique-modale" class="zone-graphique-modale">
+                <!-- Plotly chart will be moved here -->
+            </div>
+            <div id="texte-modale" class="zone-texte-modale">
+                <!-- Analysis text will be injected here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="src/index.js"></script>
+</body>
 </html>
