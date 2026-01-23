@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     chargerDonnees();
-    configurerModale();
+    configurerPe();
 });
 
 // Pour stocker les données chargées
@@ -128,7 +128,7 @@ function agregerDonnees(donnees, cleX, cleY, tailleSeau) {
 
 function afficherGraphiques(donnees) {
     
-    // Graphique 1: Volume vs Part de Marché (Bar Chart Agrégé avec Ligne de Tendance)
+    // Graphique 1: Volume vs Part de Marché (Bar Chart Agrégé avec Ligne)
     // Aggrégation par tranche de 10 TB
     const dataPartMarche = agregerDonnees(donnees, 'AI-Generated Content Volume (TBs per year)', 'Market Share of AI Companies (%)', 10);
     
@@ -137,18 +137,18 @@ function afficherGraphiques(donnees) {
         y: dataPartMarche.y,
         type: 'bar',
         marker: {
-            color: couleurs.sarcelle,
+            color: couleurs.indigo,
             opacity: 0.8
         }
     };
     
-    // Ajout d'une ligne de tendance lissée par dessus pour renforcer la lecture
+    // Ajout d'une ligne de tendance pour renforcer la lecture
     const trace1Line = {
         x: dataPartMarche.x.map(x => x + "-" + (x+10)),
         y: dataPartMarche.y,
         type: 'scatter',
         mode: 'lines',
-        line: { color: couleurs.indigo, shape: 'spline' },
+        line: { color: couleurs.sarcelle, shape: 'spline' },
         name: 'Tendance'
     };
 
@@ -161,7 +161,7 @@ function afficherGraphiques(donnees) {
     }, { responsive: true });
 
 
-    // Graphique 2: Revenus vs Adoption (Line Chart Aggregated)
+    // Graphique 2: Revenus vs Adoption (Line Chart Agrégé)
     // Aggrégation par tranche de 10% d'adoption
     const dataRevenus = agregerDonnees(donnees, 'AI Adoption Rate (%)', 'Revenue Increase Due to AI (%)', 10);
 
@@ -177,7 +177,7 @@ function afficherGraphiques(donnees) {
         },
         marker: {
             size: 8,
-            color: couleurs.rose
+            color: couleurs.sarcelle
         },
         fill: 'tozeroy', // Remplissage pour visualiser le "volume" de revenu
         fillcolor: 'rgba(37, 99, 235, 0.1)'
@@ -190,12 +190,12 @@ function afficherGraphiques(donnees) {
     }, { responsive: true });
 
 
-    // Graphique 3: Outils IA Efficiencies (Box Plot)
+    // Graphique 3: Efficacité des Outils IA (Box Plot)
     const trace3 = {
         y: donnees.map(d => d['Revenue Increase Due to AI (%)']),
         x: donnees.map(d => d['Top AI Tools Used']),
         type: 'box',
-        marker: { color: couleurs.rose },
+        marker: { color: couleurs.indigo },
         boxpoints: 'all',
         jitter: 0.3,
         pointpos: -1.8
@@ -208,7 +208,7 @@ function afficherGraphiques(donnees) {
     }, { responsive: true });
 
 
-    // Graphique 4: Adoption vs Emploi (Aggregated Bar Chart)
+    // Graphique 4: Adoption vs Emploi (Bar Chart Agrégé)
     // On veut voir si plus d'adoption = plus de perte d'emploi moyenne
     const dataAdoptionEmploi = agregerDonnees(donnees, 'AI Adoption Rate (%)', 'Job Loss Due to AI (%)', 10);
 
@@ -217,7 +217,7 @@ function afficherGraphiques(donnees) {
         y: dataAdoptionEmploi.y,
         type: 'bar',
         marker: {
-            color: couleurs.rose,
+            color: couleurs.indigo,
             opacity: 0.9,
             line: { width: 1.5, color: '#fff' } // Style plus "clean"
         },
@@ -241,13 +241,13 @@ function afficherGraphiques(donnees) {
         mode: 'lines+markers',
         type: 'scatter',
         line: {
-            color: couleurs.sarcelle,
+            color: couleurs.indigo,
             width: 4,
             shape: 'spline' // Courbe plus douce
         },
         marker: {
             size: 10,
-            color: couleurs.indigo,
+            color: couleurs.sarcelle,
             symbol: 'diamond'
         },
         name: 'Impact Collaboration'
@@ -285,7 +285,7 @@ function afficherGraphiques(donnees) {
         x: industries,
         y: metricsDef.map(m => m.label),
         type: 'heatmap',
-        colorscale: 'YlOrRd', // Jaune vers Rouge (Rouge = Valeurs élevées)
+        colorscale: 'Blues', // Uniformisation vers Bleus
         reversescale: false,
         showscale: true,
         hovertemplate: '<b>%{x}</b><br>%{y}: %{z:.1f}%<extra></extra>'
@@ -327,7 +327,7 @@ function afficherGraphiques(donnees) {
         zmin: 0,
         zmax: 100,
         text: locations.map((loc, i) => `${loc}<br>Résilience: ${z[i].toFixed(1)}%`),
-        colorscale: 'RdYlGn', // Rouge (0) -> Jaune -> Vert (100)
+        colorscale: 'Blues', // Uniformisation vers Bleus
         autocolorscale: false,
         reversescale: false,
         marker: { line: { color: 'rgb(255,255,255)', width: 0.5 } },
@@ -352,14 +352,14 @@ function afficherGraphiques(donnees) {
     }, { responsive: true });
 }
 
-// Modale Logic
-function configurerModale() {
-    const modale = document.getElementById('modale-detail');
-    const boutonFermer = document.querySelector('.fermer-modale');
+// Logique pour la fenêtre pleine écran (pe)
+function configurerPe() {
+    const pe = document.getElementById('pe-detail');
+    const boutonFermer = document.querySelector('.fermer-pe');
     const boutonsAgrandir = document.querySelectorAll('.bouton-agrandir');
-    const conteneurGraphiqueModale = document.getElementById('conteneur-graphique-modale');
-    const modaleTexte = document.getElementById('texte-modale');
-    const modaleTitre = document.getElementById('titre-modale');
+    const conteneurGraphiquePe = document.getElementById('conteneur-graphique-pe');
+    const peTexte = document.getElementById('texte-pe');
+    const peTitre = document.getElementById('titre-pe');
 
     boutonsAgrandir.forEach(bouton => {
         bouton.addEventListener('click', (e) => {
@@ -368,36 +368,36 @@ function configurerModale() {
             const titre = carte.querySelector('h3').innerText;
             const analyseComplete = carte.querySelector('.analyse-complete').innerHTML;
 
-            modaleTitre.innerText = titre;
-            modaleTexte.innerHTML = analyseComplete;
+            peTitre.innerText = titre;
+            peTexte.innerHTML = analyseComplete;
             
-            // Re-render chart in Key Modal
+            // Re-render chart in Key PE
             const graphiqueOriginal = document.getElementById(idGraphique);
             const data = graphiqueOriginal.data;
             const layout = graphiqueOriginal.layout;
             
-            Plotly.newPlot('conteneur-graphique-modale', data, layout); 
+            Plotly.newPlot('conteneur-graphique-pe', data, layout); 
             
-            modale.classList.add('active');
+            pe.classList.add('active');
             
             setTimeout(() => {
-                Plotly.relayout('conteneur-graphique-modale', {
-                    width: conteneurGraphiqueModale.clientWidth,
-                    height: conteneurGraphiqueModale.clientHeight
+                Plotly.relayout('conteneur-graphique-pe', {
+                    width: conteneurGraphiquePe.clientWidth,
+                    height: conteneurGraphiquePe.clientHeight
                 });
             }, 50);
         });
     });
 
     boutonFermer.addEventListener('click', () => {
-        modale.classList.remove('active');
-        Plotly.purge('conteneur-graphique-modale');
+        pe.classList.remove('active');
+        Plotly.purge('conteneur-graphique-pe');
     });
 
     window.addEventListener('click', (e) => {
-        if (e.target === modale) {
-            modale.classList.remove('active');
-            Plotly.purge('conteneur-graphique-modale');
+        if (e.target === pe) {
+            pe.classList.remove('active');
+            Plotly.purge('conteneur-graphique-pe');
         }
     });
 }

@@ -382,8 +382,8 @@ body {
     font-size: 1.1rem;
 }
 
-/* Modal System */
-.modale {
+/* PE System */
+.pe {
     display: none; 
     position: fixed; 
     z-index: 1000; 
@@ -398,14 +398,14 @@ body {
     transition: opacity 0.3s ease;
 }
 
-.modale.active {
+.pe.active {
     display: flex;
     opacity: 1;
     align-items: center;
     justify-content: center;
 }
 
-.contenu-modale {
+.contenu-pe {
     background-color: var(--arr-plan-page);
     margin: auto;
     padding: 40px;
@@ -422,9 +422,9 @@ body {
     box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.15);
 }
 
-/* Responsive Modal */
+/* Responsive PE */
 @media (max-width: 1024px) {
-    .contenu-modale {
+    .contenu-pe {
         grid-template-columns: 1fr;
         grid-template-rows: auto auto 1fr;
         height: auto;
@@ -433,7 +433,7 @@ body {
     }
 }
 
-.fermer-modale {
+.fermer-pe {
     position: absolute;
     right: 20px;
     top: 20px;
@@ -445,12 +445,12 @@ body {
     z-index: 10;
 }
 
-.fermer-modale:hover,
-.fermer-modale:focus {
+.fermer-pe:hover,
+.fermer-pe:focus {
     color: var(--accent-rose);
 }
 
-#titre-modale {
+#titre-pe {
     grid-column: 1 / -1;
     font-size: 2rem;
     color: var(--texte-primaire);
@@ -458,7 +458,7 @@ body {
     padding-bottom: 20px;
 }
 
-.zone-graphique-modale {
+.zone-graphique-pe {
     width: 100%;
     height: 100%;
     min-height: 500px;
@@ -467,7 +467,7 @@ body {
     border: 1px solid var(--coul-bordure);
 }
 
-.zone-texte-modale {
+.zone-texte-pe {
     color: var(--texte-primaire);
     padding: 20px;
     background-color: #fff;
@@ -476,13 +476,13 @@ body {
     border: 1px solid var(--coul-bordure);
 }
 
-.zone-texte-modale h4 {
+.zone-texte-pe h4 {
     color: var(--accent-sarcelle);
     font-size: 1.5rem;
     margin-bottom: 15px;
 }
 
-.zone-texte-modale p {
+.zone-texte-pe p {
     font-size: 1.1rem;
     line-height: 1.8;
     color: var(--texte-secondaire);
@@ -522,14 +522,14 @@ body {
 
 
 /* List Styles for Analysis Content */
-.zone-texte-modale ul,
+.zone-texte-pe ul,
 .bloc-conclusion ul {
     list-style: none;
     margin: 15px 0;
     padding-left: 0;
 }
 
-.zone-texte-modale li,
+.zone-texte-pe li,
 .bloc-conclusion li {
     position: relative;
     padding-left: 24px;
@@ -538,7 +538,7 @@ body {
     line-height: 1.6;
 }
 
-.zone-texte-modale li::before,
+.zone-texte-pe li::before,
 .bloc-conclusion li::before {
     content: '→';
     position: absolute;
@@ -547,7 +547,7 @@ body {
     font-weight: bold;
 }
 
-.zone-texte-modale li strong,
+.zone-texte-pe li strong,
 .bloc-conclusion li strong {
     color: var(--texte-primaire);
     font-weight: 700;
