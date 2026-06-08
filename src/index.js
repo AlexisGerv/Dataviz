@@ -75,7 +75,7 @@ function calculerIndicateurs(donnees) {
     // Mise à jour du DOM
     animerValeur('indicateur-volume', 0, Math.floor(volumeTotal), 2000);
     
-    // Affectation directe pour les pourcentages afin de supprimer le formatage localisé complexe dans une fonction d'animation simple
+    // Affectation directe pour les pourcentages 
     document.getElementById('indicateur-adoption').textContent = adoptionMoyenne.toFixed(1) + '%';
     document.getElementById('indicateur-emplois').textContent = '-' + perteEmploiMoyenne.toFixed(1) + '%';
 }
@@ -142,7 +142,7 @@ function afficherGraphiques(donnees) {
         }
     };
     
-    // Ajout d'une ligne de tendance pour renforcer la lecture
+    // Ajout d'une ligne de tendance pour améliorer la lecture
     const trace1Line = {
         x: dataPartMarche.x.map(x => x + "-" + (x+10)),
         y: dataPartMarche.y,
@@ -285,10 +285,9 @@ function afficherGraphiques(donnees) {
         x: industries,
         y: metricsDef.map(m => m.label),
         type: 'heatmap',
-        colorscale: 'Blues', // Uniformisation vers Bleus
+        colorscale: 'Blues', 
         reversescale: false,
-        showscale: true,
-        hovertemplate: '<b>%{x}</b><br>%{y}: %{z:.1f}%<extra></extra>'
+        showscale: true
     };
 
     Plotly.newPlot('graphique6', [trace6], {
@@ -306,7 +305,8 @@ function afficherGraphiques(donnees) {
     }, { responsive: true });
 
 
-    // Graphique 7: Carte Monde
+    // Graphique 7: Carte Monde de la résilience à la perte d'emploi due à l'IA
+    // Calcul de la résilience moyenne par pays
     const resiliencePays = {};
     donnees.forEach(d => {
         if (!resiliencePays[d.Country]) resiliencePays[d.Country] = [];
@@ -352,7 +352,7 @@ function afficherGraphiques(donnees) {
     }, { responsive: true });
 }
 
-// Logique pour la fenêtre pleine écran (pe)
+// Logique pour la fenêtre plein écran (pe)
 function configurerPe() {
     const pe = document.getElementById('pe-detail');
     const boutonFermer = document.querySelector('.fermer-pe');
@@ -371,7 +371,7 @@ function configurerPe() {
             peTitre.innerText = titre;
             peTexte.innerHTML = analyseComplete;
             
-            // Re-render chart in Key PE
+            // Charger le graphique dans le conteneur 
             const graphiqueOriginal = document.getElementById(idGraphique);
             const data = graphiqueOriginal.data;
             const layout = graphiqueOriginal.layout;
